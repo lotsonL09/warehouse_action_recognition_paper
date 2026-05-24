@@ -18,7 +18,7 @@ train:
 
 data:
   dataset:
-    root: videos/mini_dataset
+    root: datasets/mini_dataset
     selector:
       strategy: uniform
       candidate_frames: null
