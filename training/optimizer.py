@@ -44,7 +44,7 @@ def build_optimizer(model:nn.Module,
                 weight_decay=optimizer_config.weight_decay,
                 momentum=optimizer_config.momentum
             )
-        case "VideoSwinTransformer":
+        case "SwinTransformer3d":
 
             backbone=nn.ModuleList([
                 model.patch_embed,
