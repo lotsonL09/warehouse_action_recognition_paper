@@ -45,7 +45,7 @@ class VideoTrainTransform:
         self.model_name=model.__class__.__name__
 
         match self.model_name:
-            case "S3D" | "MViT" | "VivitForVideoClassification" | "VideoSwinTransformer":
+            case "S3D" | "MViT" | "VivitForVideoClassification" | "SwinTransformer3d":
                 self.resize_dim=256 #256
                 self.crop_dim=224 #224
             case "VideoResNet":

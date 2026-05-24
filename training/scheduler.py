@@ -17,7 +17,7 @@ def build_scheduler(model:nn.Module,
                     ):
 
     match model.__class__.__name__: 
-        case "VivitForVideoClassification" | "VideoSwinTransformer": # done
+        case "VivitForVideoClassification" | "SwinTransformer3d": # done
             warmup_scheduler= LinearLR(
                 optimizer,
                 start_factor=scheduler_config.linear_lr.start_factor,
