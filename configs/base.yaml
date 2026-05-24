@@ -6,9 +6,9 @@
 # 5: ViViT
 
 experiment:
-  name: prueba_4
+  name: prueba_1_video_swin
   save_dir: experiment
-  model: 1
+  model: 4
   seeds: [0]
 
 train:
@@ -18,13 +18,13 @@ train:
 
 data:
   dataset:
-    root: datasets/mini_dataset
+    root: datasets/resized_warehouse_actions
     selector:
       strategy: uniform
       candidate_frames: null
       selected_frames: 16
   
   dataloader:
-    batch_size: 2
+    batch_size: 4
     num_workers: 0
 

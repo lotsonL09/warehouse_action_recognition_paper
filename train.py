@@ -31,6 +31,8 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    print(f"device: {device}")
+
     data_cfg=experiment_cfg.data
     train_cfg=experiment_cfg.train
 

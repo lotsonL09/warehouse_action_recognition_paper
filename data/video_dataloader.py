@@ -23,7 +23,7 @@ def load_dataloader(train_dataset,
             dataset=train_dataset,
             batch_size=batch_size,
             shuffle=True,
-            num_workers=num_workers,
+            num_workers=0,
             worker_init_fn=seed_worker,
             generator=g
         )
@@ -32,7 +32,7 @@ def load_dataloader(train_dataset,
             dataset=val_dataset,
             batch_size=batch_size,
             shuffle=False,
-            num_workers=num_workers,
+            num_workers=0,
             worker_init_fn=seed_worker
         )
     return loader

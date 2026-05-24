@@ -71,19 +71,21 @@ class VideoDataset(Dataset):
         else:
             indices = self.sample_frames(total_frames)
 
-        video=video.get_batch(indices).asnumpy() # frames,H,W,C
+        frames=video.get_batch(indices).asnumpy() # frames,H,W,C
 
-        video = torch.from_numpy(video)  # uint8
+        del video
 
-        video=video.permute(0,3,1,2) #frames,C,H,W
+        frames = torch.from_numpy(frames)  # uint8
+
+        frames=frames.permute(0,3,1,2) #frames,C,H,W
 
         if self.transform:
-            video=self.transform(video)
+            frames=self.transform(frames)
 
         if self.model_name != "VivitForVideoClassification":
-            video=video.permute(1,0,2,3)
+            frames=frames.permute(1,0,2,3)
 
-        return video,label
+        return frames,label
     
     def sample_frames(self,total_frames):
         
