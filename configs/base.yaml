@@ -22,9 +22,9 @@ data:
     selector:
       strategy: uniform
       candidate_frames: null
-      selected_frames: 15
+      selected_frames: 16
   
   dataloader:
     batch_size: 2
-    num_workers: 1
+    num_workers: 0
 

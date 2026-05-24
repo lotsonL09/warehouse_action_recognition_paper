@@ -31,12 +31,16 @@ two_stages
 '''
 
 class VideoDataset(Dataset):
-    def __init__(self,targ_dir:Path,
-                    num_frames=10,
-                    strategy="motion-distribution",
-                    transform=None):
+    def __init__(self,
+                model_name:str,
+                targ_dir:Path,
+                num_frames=10,
+                strategy="motion-distribution",
+                transform=None):
         
         super().__init__()
+
+        self.model_name=model_name
         
         self.paths=list(targ_dir.glob("*/*.mp4"))
 
@@ -76,6 +80,9 @@ class VideoDataset(Dataset):
         if self.transform:
             video=self.transform(video)
 
+        if self.model_name != "VivitForVideoClassification":
+            video=video.permute(1,0,2,3)
+
         return video,label
     
     def sample_frames(self,total_frames):
@@ -96,17 +103,19 @@ class VideoDataset(Dataset):
 
         return indices
 
-def create_datasets(train_path,val_path,num_frames,strategy,train_transform,val_transform):
+def create_datasets(model_name,train_path,val_path,num_frames,strategy,train_transform,val_transform):
 
-    train_dataset=VideoDataset(targ_dir=train_path,
-                               num_frames=num_frames,
-                               strategy=strategy,
-                               transform=train_transform)
+    train_dataset=VideoDataset(model_name=model_name,
+                                targ_dir=train_path,
+                                num_frames=num_frames,
+                                strategy=strategy,
+                                transform=train_transform)
     
-    val_dataset = VideoDataset(targ_dir=val_path,
-                               num_frames=num_frames,
-                               strategy=strategy,
-                               transform=val_transform)
+    val_dataset = VideoDataset(model_name=model_name,
+                                targ_dir=val_path,
+                                num_frames=num_frames,
+                                strategy=strategy,
+                                transform=val_transform)
     return train_dataset,val_dataset
 
 
