@@ -1,0 +1,14 @@
+#S3D: 
+#     base learning rate 0.1 | no weight decay | momentum 0.9
+
+optimizer:
+  name: sgd
+  lr: 0.1
+  momentum: 0.9
+
+scheduler:
+  name: step-lr
+  step-lr:
+    factor: 10
+    gamma: 0.1
+

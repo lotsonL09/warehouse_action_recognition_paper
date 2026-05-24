@@ -1,50 +1,30 @@
+# Model
+# 1: MViT
+# 2: S3D
+# 3: Video ResNet
+# 4: Video Swin Transformer
+# 5: ViViT
+
 experiment:
   name: prueba_4
   save_dir: experiment
+  model: 1
   seeds: [0]
-
-model:
-
-  cnn:
-    embedding_dim: 512
-
-  adapter:
-    factor: 2
-    dropout: 0.5
-  
-  transformer_encoder:
-    num_heads: 2
-    num_layers: 2
-    mlp_size: 256
-  mlp:
-    hidden_units_mlp: [256,128]
-  dropout: 0.5
 
 train:
   num_classes: 5
-  epochs: 30
-  warmup_epochs: 5
-  lr: 0.001
-  weight_decay: 0.005
-
-  optimizer: adamw
-  scheduler:
-    name: warmup-cosine-decay
-    reduceLrOnPlateau: null
-    stepLr: null
-    cosineAnnealingLr: null
+  epochs: 10
+  warmup_epochs: 4
 
 data:
   dataset:
-    root: datasets/resized_warehouse_actions
+    root: videos/mini_dataset
     selector:
       strategy: uniform
       candidate_frames: null
       selected_frames: 15
-    resize_size: 110
-    crop_size: 96
   
   dataloader:
-    batch_size: 64
-    num_workers: 2
+    batch_size: 2
+    num_workers: 1
 

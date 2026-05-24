@@ -3,6 +3,10 @@ import torch.optim as optim
 import math
 from config.train_config import SchedulerClass
 
+'''
+YA NO SE VA A USAR
+'''
+
 def define_optimizer_and_scheduler(model:nn.Module,
                                    learning_rate:float,
                                    weight_decay:float,

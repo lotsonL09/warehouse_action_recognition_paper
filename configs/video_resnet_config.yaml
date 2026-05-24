@@ -1,0 +1,19 @@
+#VideoResNet: 
+#     VideoResNet: base learning rate 0.1 | weight decay 1 x 10^-3 | momentum 0.9
+
+optimizer:
+  name: sgd
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 1e-3
+
+#validation loss
+scheduler:
+  name: reduceLrOnPlateau
+  reduce-lr-on-plateau:
+    mode: min
+    factor: 0.1
+    patience: 3
+
+    
+

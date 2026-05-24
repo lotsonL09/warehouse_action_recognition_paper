@@ -1,0 +1,18 @@
+#MViT: 
+#     MViT: base learning rate 1.6 x 10^-3 | weight decay 5 x 10^-2 
+
+optimizer:
+  name: adamw
+  lr: 1.6e-3
+  weight_decay: 1e-3
+
+scheduler:
+  name: cosine-annealing-lr
+  linear_lr:
+    start_factor: 0.1
+    end_factor: 1.0
+  cosine_annealing_lr:
+    eta_min: 1e-6
+
+    
+

@@ -1,0 +1,16 @@
+#VivitForVideoClassification: 
+#     base learning rate 0.1 | no weight decay | momentum 0.9
+
+optimizer:
+  name: sgd
+  lr: 0.1
+  momentum: 0.9
+
+scheduler:
+  name: cosine-annealing-lr
+  linear_lr:
+    start_factor: 0.1
+    end_factor: 1.0
+  cosine_annealing_lr:
+    eta_min: 1e-6
+

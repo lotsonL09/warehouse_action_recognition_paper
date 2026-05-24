@@ -31,7 +31,11 @@ two_stages
 '''
 
 class VideoDataset(Dataset):
-    def __init__(self,targ_dir:Path,num_frames=10,strategy="motion-distribution",transform=None):
+    def __init__(self,targ_dir:Path,
+                    num_frames=10,
+                    strategy="motion-distribution",
+                    transform=None):
+        
         super().__init__()
         
         self.paths=list(targ_dir.glob("*/*.mp4"))

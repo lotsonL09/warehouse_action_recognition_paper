@@ -8,9 +8,12 @@ def seed_worker(worker_id):
     np.random.seed(worker_seed)
     random.seed(worker_seed)
 
-def load_dataloader(train_dataset,val_dataset,
-                    batch_size,is_train_loader,
-                    num_workers,seed):
+def load_dataloader(train_dataset,
+                    val_dataset,
+                    batch_size,
+                    is_train_loader,
+                    num_workers,
+                    seed):
     
     g=torch.Generator()
     g.manual_seed(seed)

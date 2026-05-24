@@ -1,0 +1,21 @@
+# Video Swin: 
+# VideoSwinTransformer: weight decay 5 x 10^-2 
+
+#    The learning rate of the backbone architecture needs to be smaller (x0.1) than that of the head.
+#    3e-5 -> backbone, 3e-4 -> head
+
+optimizer:
+  name: adamw
+  lr: 3e-4
+  weight_decay: 5e-2
+
+scheduler:
+  name: cosine-annealing-lr
+  linear_lr:
+    start_factor: 0.1
+    end_factor: 1.0
+  cosine_annealing_lr:
+    eta_min: 1e-6
+
+    
+

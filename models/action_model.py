@@ -3,7 +3,6 @@ from models.transformer.transformer_encoder import TransformerEncoder
 from models.transformer.positional_encoding import PositionalEncoding
 from models.heads.classification_heads import ClassificationHead
 from models.adaptive_selector import filtering_stage
-from scipy.signal import savgol_filter
 import torch
 import torch.nn as nn
 

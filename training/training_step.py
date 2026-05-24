@@ -6,8 +6,7 @@ def train_step(model:torch.nn.Module,
             loss_fn:torch.nn.Module,
             optimizer:torch.optim.Optimizer,
             device,
-            scheduler=None,
-            scheduler_step_per_batch=False):
+            scheduler=None):
 
     model.train()
 
@@ -34,9 +33,6 @@ def train_step(model:torch.nn.Module,
         loss.backward()
 
         optimizer.step()
-
-        if scheduler is not None and scheduler_step_per_batch:
-            scheduler.step()
 
         _,predicted=outputs.max(1)
 

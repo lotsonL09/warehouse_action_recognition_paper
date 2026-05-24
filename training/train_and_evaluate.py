@@ -12,7 +12,6 @@ def train_and_evaluate(model: nn.Module,
                        val_dataloader: torch.utils.data.DataLoader,
                        loss_fcn: nn.Module,
                        optimizer: optim.Optimizer,
-                       scheduler_name:str,
                        scheduler:optim.lr_scheduler._LRScheduler,
                        n_epochs:int,
                        save_path:Path,
@@ -34,26 +33,22 @@ def train_and_evaluate(model: nn.Module,
 
     for epoch in tqdm(range(n_epochs)):
 
-        scheduler_step_per_batch = True if scheduler_name == "warmup-cosine-decay" else False
-
         train_loss,train_acc=train_step(model=model,
                                         dataloader=train_dataloader,
                                         loss_fn=loss_fcn,
                                         optimizer=optimizer,
                                         device=device,
-                                        scheduler=scheduler,
-                                        scheduler_step_per_batch=scheduler_step_per_batch)
+                                        scheduler=scheduler)
 
         val_loss,val_acc=val_step(model=model,
                                      dataloader=val_dataloader,
                                      loss_fn=loss_fcn,
                                      device=device)
         
-        if scheduler != None and not scheduler_step_per_batch:
-            if isinstance(scheduler,optim.lr_scheduler.ReduceLROnPlateau):
-                scheduler.step(val_acc)
-            else:
-                scheduler.step()
+        if isinstance(scheduler,optim.lr_scheduler.ReduceLROnPlateau):
+            scheduler.step(val_loss)
+        else:
+            scheduler.step()
 
         if save_path != None:
             if val_acc>best_eval_acc:
