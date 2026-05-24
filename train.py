@@ -55,7 +55,8 @@ def main():
         seed_path=save_path/str(seed)
         seed_path.mkdir(parents=True,exist_ok=True)
 
-        train_dataset,val_dataset=create_datasets(train_path=train_path,
+        train_dataset,val_dataset=create_datasets(model_name=model.__class__.__name__,
+                                                train_path=train_path,
                                                 val_path=val_path,
                                                 num_frames=data_cfg.dataset.selector.selected_frames,
                                                 strategy=data_cfg.dataset.selector.strategy, ##IMPORTANTE
