@@ -20,13 +20,19 @@ def val_step(model:torch.nn.Module,
 
             outputs=model(X)
 
-            loss = loss_fn(outputs,y)
+            if model.__class__.__name__ == "VivitForVideoClassification":
+                loss = loss_fn(outputs.logits, y)
+            else:
+                loss=loss_fn(outputs,y)
 
             batch_size=y.size(0)
 
             total_loss+=loss.item()*batch_size
 
-            _,predicted_indices=outputs.max(1)            
+            if model.__class__.__name__ == "VivitForVideoClassification":
+                _,predicted_indices=outputs.logits.max(1)
+            else:
+                _,predicted_indices=outputs.max(1)        
             
             total_correct += (predicted_indices == y).sum().item()
 

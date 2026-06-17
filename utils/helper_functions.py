@@ -126,15 +126,31 @@ def get_samples_from_dataset(dataset_dir:Path):
 
     return np.stack(frames,axis=0)
                 
-def save_experiment(results:dict,
-                    config_path:Path,
+def save_experiment(model:int,
+                    results:dict,
+                    configs_path:Path,
                     save_path:Path):
     
     results_path=save_path/"metrics.json"
     with open(results_path, "w") as f:
         json.dump(results, f, indent=4)
 
-    shutil.copy(config_path,save_path/"config.yaml")
+    shutil.copy(configs_path/"base.yaml",save_path/"base.yaml")
+
+    match model:
+        case 1:
+            model_name="mvit_config.yaml"
+        case 2:
+            model_name="s3d_config.yaml"
+        case 3:
+            model_name="video_resnet_config.yaml"
+        case 4:
+            model_name="video_swin_config.yaml"
+        case 5:
+            model_name="vivit_config.yaml"
+    
+    shutil.copy(configs_path/model_name,save_path/"model_config.yaml")
+
 
 def debug_dataloader(dataloader:torch.utils.data.DataLoader):
 

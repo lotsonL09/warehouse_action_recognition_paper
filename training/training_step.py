@@ -5,8 +5,7 @@ def train_step(model:torch.nn.Module,
             dataloader:torch.utils.data.dataloader,
             loss_fn:torch.nn.Module,
             optimizer:torch.optim.Optimizer,
-            device,
-            scheduler=None):
+            device):
 
     model.train()
 
@@ -24,7 +23,10 @@ def train_step(model:torch.nn.Module,
 
         outputs=model(X)
 
-        loss=loss_fn(outputs,y)
+        if model.__class__.__name__ == "VivitForVideoClassification":
+            loss = loss_fn(outputs.logits, y)
+        else:
+            loss=loss_fn(outputs,y)
 
         batch_size=y.size(0)
 
@@ -34,7 +36,10 @@ def train_step(model:torch.nn.Module,
 
         optimizer.step()
 
-        _,predicted=outputs.max(1)
+        if model.__class__.__name__ == "VivitForVideoClassification":
+            _,predicted=outputs.logits.max(1)
+        else:
+            _,predicted=outputs.max(1)
 
         total_correct+= (predicted == y).sum().item()
 

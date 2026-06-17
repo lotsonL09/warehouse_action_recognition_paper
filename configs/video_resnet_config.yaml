@@ -10,7 +10,7 @@ optimizer:
 #validation loss
 scheduler:
   name: reduceLrOnPlateau
-  reduce-lr-on-plateau:
+  reduce_lr_on_plateau:
     mode: min
     factor: 0.1
     patience: 3

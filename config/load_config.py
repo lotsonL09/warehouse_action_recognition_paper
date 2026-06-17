@@ -30,6 +30,7 @@ def load_config(path:Path) -> Config:
         data=DataConfig(**cfg_dict['data'])
     )
 
+
 '''
 Model
 1: MViT

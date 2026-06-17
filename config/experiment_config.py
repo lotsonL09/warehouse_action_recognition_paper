@@ -5,3 +5,4 @@ class ExperimentConfig(BaseModel):
     save_dir:str
     model: int
     seeds:list[int]
+    phase:int | None = None

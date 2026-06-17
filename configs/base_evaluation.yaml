@@ -14,8 +14,6 @@ experiment:
 
 train:
   num_classes: 5
-  epochs: 30
-  warmup_epochs: 5
 
 data:
   dataset:

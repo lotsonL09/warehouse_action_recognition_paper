@@ -2,26 +2,49 @@ from transformers import VivitForVideoClassification, VivitConfig
 
 import torch.nn as nn
 
-def get_custom_vivit(num_classes):
+def get_custom_vivit(num_classes:int,phase:int):
 
-    config=VivitConfig.from_pretrained("google/vivit-b-16x2-kinetics400")
+    match phase:
+        case 1:
 
-    config.num_frames=16
+            config=VivitConfig.from_pretrained("google/vivit-b-16x2-kinetics400")
 
-    vivit_model=VivitForVideoClassification(config)
+            config.num_frames=16
 
-    #Freeze weights
-    for param in vivit_model.parameters():
-        param.requires_grad=False
+            vivit_model=VivitForVideoClassification(config)
 
-    num_ftrs = vivit_model.classifier.in_features
+            #Freeze weights
+            for param in vivit_model.parameters():
+                param.requires_grad=False
 
-    custom_classifier = nn.Linear(num_ftrs,num_classes)
+            num_ftrs = vivit_model.classifier.in_features
 
-    vivit_model.classifier = custom_classifier
+            custom_classifier = nn.Linear(num_ftrs,num_classes)
 
-    for param in vivit_model.classifier.parameters():
-        param.requires_grad=True
+            vivit_model.classifier = custom_classifier
+
+            for param in vivit_model.classifier.parameters():
+                param.requires_grad=True
+        case 2:
+
+            config=VivitConfig.from_pretrained("google/vivit-b-16x2-kinetics400")
+
+            config.num_frames=16
+
+            vivit_model=VivitForVideoClassification(config)
+
+            num_ftrs = vivit_model.classifier.in_features
+
+            custom_classifier = nn.Linear(num_ftrs,num_classes)
+
+            vivit_model.classifier = custom_classifier
+
+        case 3:
+            pass
+        case 4:
+            pass
+        case 5:
+            pass
 
     return vivit_model 
 
