@@ -35,15 +35,13 @@ def main():
 
     match experiment_phase:
         case 1:
-            print("All freeze but the classifier")
+            print("Linear Probing")
         case 2:
-            print("All unfreeze")
+            print("Partial Fine-Tuning I")
         case 3:
-            print("Unfreeze part of the architecture")
+            print("Partial Fine-Tuning II")
         case 4:
-            pass
-        case 5:
-            pass
+            print("Full Fine-Tuning")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -61,9 +59,6 @@ def main():
 
     train_path=root_path/"train"
     val_path=root_path/"val"
-
-
-    ## AQUI DEBERIAMOS DEFINIR EL BUCLE PARA PROBAR VARIAS SEMILLAS
 
     for seed in seeds:
         model = get_model(model=experiment_cfg.experiment.model,
@@ -110,7 +105,7 @@ def main():
                                   warmup_epochs=train_cfg.warmup_epochs
                                   )
 
-        loss_fcn=nn.CrossEntropyLoss() #TODO: LABEL SMOOTHING
+        loss_fcn=nn.CrossEntropyLoss()
 
         results=train_and_evaluate(model=model,
                         train_dataloader=train_dataloader,

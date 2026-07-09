@@ -14,7 +14,5 @@ def get_model(model:int,num_classes:int,phase:int):
         return get_custom_r3d(num_classes,phase)
     elif model == 4:
         return get_custom_video_swin_transformer(num_classes,phase)
-    elif model == 5:
-        return get_custom_vivit(num_classes,phase)
     else:
-        raise ValueError("Invalid model choice. Please select a number between 1 and 5.")
+        raise ValueError("Invalid model choice. Please select a number between 1 and 4.")

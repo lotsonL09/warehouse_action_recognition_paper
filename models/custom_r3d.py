@@ -2,12 +2,10 @@ from torchvision.models.video import r3d_18, R3D_18_Weights
 import torch.nn as nn
 
 def get_custom_r3d(num_classes:int,phase:int):
-
+    r3d_model = r3d_18(weights=R3D_18_Weights.DEFAULT)
     match phase:
         case 1:
             
-            r3d_model = r3d_18(weights=R3D_18_Weights.DEFAULT)
-
             #Freeze weights
             for param in r3d_model.parameters():
                 param.requires_grad=False
@@ -22,18 +20,6 @@ def get_custom_r3d(num_classes:int,phase:int):
                 param.requires_grad=True
 
         case 2:
-            # unfreeze all weights
-
-            r3d_model = r3d_18(weights=R3D_18_Weights.DEFAULT)
-
-            num_ftrs = r3d_model.fc.in_features
-
-            custom_fc = nn.Linear(num_ftrs,num_classes)
-
-            r3d_model.fc = custom_fc
-
-        case 3:
-            r3d_model = r3d_18(weights=R3D_18_Weights.DEFAULT)
 
             #Freeze weights
             for param in r3d_model.parameters():
@@ -54,8 +40,7 @@ def get_custom_r3d(num_classes:int,phase:int):
             for param in r3d_model.layer4.parameters():
                 param.requires_grad=True
             
-        case 4:
-            r3d_model = r3d_18(weights=R3D_18_Weights.DEFAULT)
+        case 3:
 
             #Freeze weights
             for param in r3d_model.parameters():
@@ -79,7 +64,14 @@ def get_custom_r3d(num_classes:int,phase:int):
             for param in r3d_model.layer3.parameters():
                 param.requires_grad=True
             
-        case 5:
-            pass
+        case 4:
+            # unfreeze all weights
+
+
+            num_ftrs = r3d_model.fc.in_features
+
+            custom_fc = nn.Linear(num_ftrs,num_classes)
+
+            r3d_model.fc = custom_fc
   
     return r3d_model
