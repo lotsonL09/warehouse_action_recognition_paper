@@ -4,12 +4,18 @@ import torch.nn as nn
 
 def get_custom_video_swin_transformer(num_classes:int, phase:int):
 
+<<<<<<< HEAD
     '''
     phase 1: only classifier
     phase 2:
     phase 3:
     phase 4:
     phase 5: unfreeze all weights
+=======
+    #video_swin_model = swin3d_b(weights=Swin3D_B_Weights.DEFAULT)
+
+    video_swin_model = swin3d_t(weights=Swin3D_T_Weights.DEFAULT)
+>>>>>>> cced482 (pre merge)
 
     '''
 
